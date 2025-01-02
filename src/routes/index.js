@@ -1,9 +1,12 @@
-import SidebarLayout from '~/Layout/SidebarLayout';
+import MainLayout from '../components/Layout/MainLayout';
 import SvHome from '~/pages/Home';
 import Login from '~/pages/Login';
 
-const privateRoutes = [{ path: '/', component: SvHome, layout: SidebarLayout }];
+const privateRoutes = [];
 
-const publicRoutes = [{ path: '/login', component: Login }];
+const publicRoutes = [
+    { path: '/login', component: Login },
+    { path: '/', component: SvHome, layout: MainLayout },
+];
 
 export { privateRoutes, publicRoutes };
