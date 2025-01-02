@@ -1,53 +1,87 @@
 import React, { useState } from 'react';
 
 const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
 
     return (
-        <nav className="bg-blue-500">
-            <div className="container mx-auto px-4 flex justify-between items-center py-4">
+        <header className="bg-white shadow-md fixed w-full z-50 top-0 left-0">
+            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo */}
-                <div className="text-white text-2xl font-bold">MyLogo</div>
+                <div className="text-2xl font-bold text-purple-600">
+                    <a href="#">Tử Vi Huyền Bí</a>
+                </div>
 
-                {/* Hamburger Menu - Mobile */}
-                <button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex space-x-6">
+                    <a href="#home" className="text-gray-600 hover:text-purple-500">
+                        Trang Chủ
+                    </a>
+                    <a href="#features" className="text-gray-600 hover:text-purple-500">
+                        Tính Năng
+                    </a>
+                    <a href="#cta" className="text-gray-600 hover:text-purple-500">
+                        Đăng Ký
+                    </a>
+                </nav>
+
+                {/* Mobile Menu Button */}
+                <button className="md:hidden text-gray-600 focus:outline-none" onClick={toggleMenu}>
                     <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
-                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
-
-                {/* Menu Items */}
-                <ul
-                    className={`md:flex md:items-center md:space-x-8 absolute md:static bg-blue-500 w-full md:w-auto left-0 top-16 md:top-auto md:opacity-100 ${
-                        isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                    } transition-all duration-300`}
-                >
-                    <li className="text-white py-2 px-4 hover:bg-blue-700 md:hover:bg-transparent">
-                        <a href="#home">Home</a>
-                    </li>
-                    <li className="text-white py-2 px-4 hover:bg-blue-700 md:hover:bg-transparent">
-                        <a href="#about">About</a>
-                    </li>
-                    <li className="text-white py-2 px-4 hover:bg-blue-700 md:hover:bg-transparent">
-                        <a href="#services">Services</a>
-                    </li>
-                    <li className="text-white py-2 px-4 hover:bg-blue-700 md:hover:bg-transparent">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
             </div>
-        </nav>
+
+            {/* Mobile Menu */}
+            <div
+                className={`${
+                    menuOpen ? 'translate-x-0' : '-translate-x-full'
+                } fixed top-0 left-0 w-full h-full bg-purple-700 text-white transition-transform duration-500 ease-in-out md:hidden`}
+            >
+                <div className="flex justify-between items-center p-4">
+                    <div className="text-2xl font-bold">
+                        <a href="#">Tử Vi Huyền Bí</a>
+                    </div>
+                    <button onClick={toggleMenu} className="text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <nav className="flex flex-col items-center">
+                    <a href="#home" className="py-4 text-2xl hover:text-yellow-400" onClick={toggleMenu}>
+                        Trang Chủ
+                    </a>
+                    <a href="#features" className="py-4 text-2xl hover:text-yellow-400" onClick={toggleMenu}>
+                        Tính Năng
+                    </a>
+                    <a href="#cta" className="py-4 text-2xl hover:text-yellow-400" onClick={toggleMenu}>
+                        Đăng Ký
+                    </a>
+                </nav>
+            </div>
+        </header>
     );
 };
 

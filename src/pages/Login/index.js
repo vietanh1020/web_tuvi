@@ -1,60 +1,76 @@
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-const Div = styled.div`
-    padding-top: 100px;
-    width: 500px;
-`;
+const Login = () => {
+    // Validation schema using Yup
+    const validationSchema = Yup.object({
+        email: Yup.string().email('Invalid email address').required('Email is required'),
+        password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+    });
 
-function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cookies, setCookie] = useCookies();
-    const navigate = useNavigate();
+    // Initial values for the form
+    const initialValues = {
+        email: '',
+        password: '',
+    };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // Form submission handler
+    const onSubmit = (values, { setSubmitting, resetForm }) => {
+        console.log('Login form data:', values);
+        setTimeout(() => {
+            alert('Login successful!');
+            setSubmitting(false);
+            resetForm();
+        }, 1000);
     };
 
     return (
-        <Div className="container mt-4">
-            <form>
-                <div className="form-outline mb-4 mt-4">
-                    <label className="form-label mt-3" for="form2Example1">
-                        Email address
-                    </label>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 bg-white rounded shadow-md">
+                <h1 className="mb-6 text-2xl font-bold text-center text-gray-700">Login</h1>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div className="mb-4">
+                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-600">
+                                    Email
+                                </label>
+                                <Field
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    className="w-full px-4 py-2 text-gray-700 bg-gray-100 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+                                />
+                                <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-500" />
+                            </div>
 
-                    <input
-                        type="email"
-                        id="form2Example1"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="form-control"
-                    />
-                </div>
+                            <div className="mb-4">
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-600">
+                                    Password
+                                </label>
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    className="w-full px-4 py-2 text-gray-700 bg-gray-100 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+                                />
+                                <ErrorMessage name="password" component="div" className="mt-1 text-sm text-red-500" />
+                            </div>
 
-                <div className="form-outline mb-4">
-                    <label className="form-label" for="form2Example2">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="form2Example2"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="form-control"
-                    />
-                </div>
-
-                <Button type="Button" onClick={handleSubmit} className="btn btn-primary btn-block mb-4">
-                    Sign in
-                </Button>
-            </form>
-        </Div>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 disabled:bg-gray-400 focus:outline-none"
+                            >
+                                {isSubmitting ? 'Logging in...' : 'Login'}
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        </div>
     );
-}
+};
 
 export default Login;

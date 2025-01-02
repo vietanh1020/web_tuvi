@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-    baseURL: 'https://sso.api4hub.com', // Replace with your API's base URL
-    timeout: 120000, // Timeout after 5 seconds
+    baseURL: process.env.REACT_APP_API_URL,
+    timeout: 120000,
 });
 
 // Request interceptor

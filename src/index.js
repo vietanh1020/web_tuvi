@@ -3,17 +3,32 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyle';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RecoilRoot } from 'recoil';
 import { CookiesProvider } from 'react-cookie';
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 3,
+        },
+    },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <GlobalStyles>
-            <CookiesProvider>
-                <App />
-            </CookiesProvider>
-        </GlobalStyles>
+        <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
+                <GlobalStyles>
+                    <CookiesProvider>
+                        <App />
+                        <ToastContainer theme="light" />
+                    </CookiesProvider>
+                </GlobalStyles>
+            </RecoilRoot>
+        </QueryClientProvider>
     </React.StrictMode>,
 );
 
