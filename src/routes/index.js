@@ -6,6 +6,9 @@ const privateRoutes = [];
 
 const publicRoutes = [
     { path: '/login', component: Login },
+    { path: '/register', component: Login },
+    { path: '/me', component: SvHome, layout: MainLayout },
+
     { path: '/', component: SvHome, layout: MainLayout },
 ];
 
