@@ -9,27 +9,27 @@ import { RecoilRoot } from 'recoil';
 import { CookiesProvider } from 'react-cookie';
 
 const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            retry: 3,
-        },
+  defaultOptions: {
+    queries: {
+      retry: 3,
     },
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <RecoilRoot>
-                <GlobalStyles>
-                    <CookiesProvider>
-                        <App />
-                        <ToastContainer theme="light" />
-                    </CookiesProvider>
-                </GlobalStyles>
-            </RecoilRoot>
-        </QueryClientProvider>
-    </React.StrictMode>,
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <GlobalStyles>
+          <CookiesProvider>
+            <App />
+            <ToastContainer theme="light" />
+          </CookiesProvider>
+        </GlobalStyles>
+      </RecoilRoot>
+    </QueryClientProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

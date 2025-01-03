@@ -1,15 +1,15 @@
 @import 'normalize.css';
 :root {
-    --primary: #56a4fe;
+  --primary: #56a4fe;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 body {
-    margin: 0 auto;
-    font-family: Roboto, sans-serif;
+  margin: 0 auto;
+  font-family: Roboto, sans-serif;
 }
 
 @tailwind base;
