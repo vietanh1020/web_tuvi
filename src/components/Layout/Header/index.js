@@ -75,7 +75,7 @@ const Header = () => {
       <div
         className={`${
           menuOpen ? 'translate-x-0' : '-translate-x-full'
-        } fixed top-0 left-0 w-full h-full bg-[#760F00]  transition-transform duration-500 ease-in-out md:hidden`}
+        } fixed top-0 left-0 w-full h-[100vh] bg-[#760F00]  transition-transform duration-500 ease-in-out md:hidden`}
       >
         <div className="flex justify-between border-b border-[#f5d556] items-center pl-2 pr-4">
           <div className="text-2xl font-bold">
@@ -87,11 +87,22 @@ const Header = () => {
             <Icon size={24} name="X" color="#fff" />
           </button>
         </div>
+
         <nav className="">
           {menu.map((item) => (
             <MenuItem {...item} />
           ))}
         </nav>
+
+        <div
+          style={{
+            width: `calc(100% - 64px)`,
+          }}
+          className="mt-52 flex gap-2 justify-center items-center mx-8 border text-primary font-medium border-primary rounded-[60px]"
+        >
+          <img src="asset/images/user-setting.png"></img>
+          <div>Nguyễn Văn An</div>
+        </div>
       </div>
     </header>
   );
