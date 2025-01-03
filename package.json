@@ -9,6 +9,7 @@
         "@testing-library/user-event": "^13.5.0",
         "axios": "^1.6.0",
         "formik": "^2.4.1",
+        "lucide-react": "^0.469.0",
         "moment": "^2.29.4",
         "normalize.css": "^8.0.1",
         "papaparse": "^5.4.1",
